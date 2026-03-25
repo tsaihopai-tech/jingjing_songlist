@@ -579,6 +579,9 @@ header {
 
 .toast.show { transform: translateX(-50%) translateY(0); }
 
+/* ==================== Sidebar Resize Handle (desktop: hidden) ==================== */
+.sidebar-resize-handle { display: none; }
+
 /* ==================== Queue Overlay Backdrop (mobile) ==================== */
 .queue-backdrop {
   display: none;
@@ -643,19 +646,65 @@ header {
   .sidebar {
     width: 100%;
     min-width: unset;
-    height: auto;
+    height: 56px;
+    min-height: 50px;
+    max-height: 200px;
     border-right: none;
     border-bottom: 1px solid rgba(245, 197, 24, 0.2);
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: nowrap;
     overflow-x: auto;
     overflow-y: hidden;
-    padding: 8px;
+    padding: 6px 8px 14px;
     gap: 4px;
+    position: relative;
+    flex-shrink: 0;
+    transition: height 0.05s;
+  }
+
+  .sidebar.expanded {
+    flex-wrap: wrap;
+    overflow-x: hidden;
+    overflow-y: auto;
+    align-items: flex-start;
+    align-content: flex-start;
   }
 
   .sidebar-title { display: none; }
+
+  /* Resize handle */
+  .sidebar-resize-handle {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 14px;
+    justify-content: center;
+    align-items: center;
+    cursor: row-resize;
+    background: linear-gradient(transparent, rgba(13,13,26,0.9));
+    touch-action: none;
+    user-select: none;
+    z-index: 10;
+  }
+
+  .sidebar-resize-handle::after {
+    content: '';
+    width: 40px;
+    height: 3px;
+    background: rgba(245, 197, 24, 0.5);
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .sidebar-resize-handle:hover::after,
+  .sidebar-resize-handle.dragging::after {
+    background: rgba(245, 197, 24, 0.9);
+    width: 56px;
+  }
 
   .artist-tab {
     flex-direction: row;
@@ -721,7 +770,7 @@ header {
   .main-layout { height: calc(100vh - 96px); }
 
   /* Sidebar strip: compact */
-  .sidebar { padding: 6px; gap: 2px; }
+  .sidebar { padding: 6px 6px 14px; gap: 2px; height: 50px; }
 
   .artist-tab { padding: 5px 8px; gap: 5px; }
 
