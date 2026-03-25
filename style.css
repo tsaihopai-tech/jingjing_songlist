@@ -585,6 +585,9 @@ header {
 /* ==================== Sidebar Resize Handle (desktop: hidden) ==================== */
 .sidebar-resize-handle { display: none; }
 
+/* ==================== Mobile Artist Dropdown (desktop: hidden) ==================== */
+.mobile-artist-dropdown { display: none; }
+
 /* ==================== Queue Overlay Backdrop (mobile) ==================== */
 .queue-backdrop {
   display: none;
@@ -639,45 +642,60 @@ header {
 
   .queue-btn { padding: 7px 14px; font-size: 0.85rem; }
 
+  /* Mobile dropdown */
+  .mobile-artist-dropdown {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    background: var(--bg-card2);
+    border-bottom: 1px solid rgba(245, 197, 24, 0.2);
+    position: relative;
+  }
+
+  .mobile-artist-dropdown-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .mobile-artist-dropdown select {
+    flex: 1;
+    appearance: none;
+    -webkit-appearance: none;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(245,197,24,0.5);
+    border-radius: 8px;
+    color: var(--gold);
+    font-size: 0.95rem;
+    font-family: inherit;
+    padding: 7px 32px 7px 12px;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .mobile-artist-dropdown select option {
+    background: var(--bg-card2);
+    color: var(--text);
+  }
+
+  .mobile-artist-dropdown-arrow {
+    position: absolute;
+    right: 26px;
+    color: var(--gold);
+    font-size: 1rem;
+    pointer-events: none;
+  }
+
   /* Layout */
   .main-layout {
     flex-direction: column;
-    height: calc(100vh - 108px);
+    height: calc(100vh - 148px);
   }
 
-  /* Sidebar becomes horizontal strip */
-  .sidebar {
-    width: 100%;
-    min-width: unset;
-    height: 56px;
-    min-height: 50px;
-    max-height: 200px;
-    border-right: none;
-    border-bottom: 1px solid rgba(245, 197, 24, 0.2);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 6px 8px 14px;
-    gap: 4px;
-    position: relative;
-    flex-shrink: 0;
-    transition: height 0.05s;
-  }
+  /* Hide sidebar on mobile */
+  .sidebar { display: none; }
 
-  .sidebar.expanded {
-    flex-wrap: wrap;
-    overflow-x: hidden;
-    overflow-y: auto;
-    align-items: flex-start;
-    align-content: flex-start;
-  }
-
-  .sidebar-title { display: none; }
-
-  /* Resize handle */
+  /* Resize handle (not used on mobile anymore, keep hidden) */
   .sidebar-resize-handle {
     display: flex;
     position: absolute;
@@ -770,15 +788,7 @@ header {
   .header-title span { font-size: 0.85rem; }
   .header-subtitle { display: none; }
 
-  .main-layout { height: calc(100vh - 96px); }
-
-  /* Sidebar strip: compact */
-  .sidebar { padding: 6px 6px 14px; gap: 2px; height: 50px; }
-
-  .artist-tab { padding: 5px 8px; gap: 5px; }
-
-  .artist-tab .avatar { width: 28px; height: 28px; font-size: 0.9rem; }
-  .artist-tab .name { font-size: 0.72rem; }
+  .main-layout { height: calc(100vh - 140px); }
 
   /* Content */
   .content { padding: 10px; }

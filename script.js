@@ -114,6 +114,7 @@ function init() {
 }
 
 function renderArtistTabs() {
+  // 桌面版 sidebar tabs
   const container = document.getElementById('artistTabs');
   container.innerHTML = ARTISTS.map(a => `
     <div class="artist-tab" onclick="filterArtist('${a.id}')" data-artist="${a.id}">
@@ -121,15 +122,24 @@ function renderArtistTabs() {
       <div class="name">${a.name}</div>
     </div>
   `).join('');
+
+  // 手機版 dropdown options
+  const select = document.getElementById('artistSelect');
+  select.innerHTML = '<option value="all">🎵 全部歌手</option>' +
+    ARTISTS.map(a => `<option value="${a.id}">${a.emoji} ${a.name}</option>`).join('');
 }
 
 function filterArtist(id) {
   activeArtist = id;
   searchQuery = '';
   document.getElementById('searchInput').value = '';
+  // 桌面版 tabs
   document.querySelectorAll('.artist-tab').forEach(t => {
     t.classList.toggle('active', t.dataset.artist === id);
   });
+  // 手機版 dropdown 同步
+  const select = document.getElementById('artistSelect');
+  if (select.value !== id) select.value = id;
   renderContent();
 }
 
@@ -298,6 +308,11 @@ function closeQueue() {
   panel.classList.add('hidden');
   backdrop.classList.remove('show');
 }
+
+// Mobile artist dropdown
+document.getElementById('artistSelect').addEventListener('change', e => {
+  filterArtist(e.target.value);
+});
 
 // Search
 document.getElementById('searchInput').addEventListener('input', e => {
