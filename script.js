@@ -107,6 +107,10 @@ let searchQuery = '';
 function init() {
   renderArtistTabs();
   renderContent();
+  // 手機版預設收起 queue panel
+  if (window.innerWidth <= 768) {
+    document.getElementById('queuePanel').classList.add('hidden');
+  }
 }
 
 function renderArtistTabs() {

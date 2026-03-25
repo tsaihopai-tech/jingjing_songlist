@@ -325,9 +325,12 @@ header {
 }
 
 .queue-panel.hidden {
-  transform: translateX(300px);
+  transform: translateX(320px);
   position: absolute;
   right: 0;
+  top: 0;
+  height: 100%;
+  pointer-events: none;
 }
 
 .queue-header {
